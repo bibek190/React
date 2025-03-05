@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const Clicker = ({ keyName, color }) => {
+const Clicker = ({ keyName, color, increments }) => {
   const [count, setCount] = useState(
     parseInt(localStorage.getItem(keyName) ?? 0)
   );
@@ -18,6 +18,7 @@ const Clicker = ({ keyName, color }) => {
 
   const increment = () => {
     setCount((value) => value + 1);
+    increment();
   };
 
   const decrement = () => {
@@ -27,7 +28,7 @@ const Clicker = ({ keyName, color }) => {
   return (
     <>
       <h1 style={{ color }}>Count : {count}</h1>
-      <button style={{ marginRight: "2rem" }} onClick={increment}>
+      <button style={{ marginRight: "2rem" }} onClick={increments}>
         Add
       </button>
       <button onClick={decrement}>Minus</button>
