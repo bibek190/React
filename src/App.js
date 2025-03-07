@@ -1,5 +1,6 @@
 import react, { useState } from "react";
 import Clicker from "./Clicker";
+import People from "./People";
 
 const App = ({ children }) => {
   const [hasClicker, setHasClicker] = useState(true);
@@ -37,6 +38,7 @@ const App = ({ children }) => {
             color={`hsl(${Math.random() * 360}deg,100%,70%)`}
             increments={increments}
           />
+          <People />
         </>
       )}
     </>
