@@ -1,16 +1,19 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import "./App.css";
 import Create from "./components/Create";
-import Error from "./components/Error";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 const App = () => {
   return (
-    <>
-      <Routes>
-        <Route exact path="/" element={<Create />} />
-        <Route path="*" element={<Error />} />
-      </Routes>
-    </>
+    <div>
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route exact path="/" element={<Create />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
   );
 };
 

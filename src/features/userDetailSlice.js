@@ -1,46 +1,32 @@
-import {
-  createAsyncThunk,
-  createSlice,
-  isRejectedWithValue,
-} from "@reduxjs/toolkit";
-import axios from "axios";
-import { act } from "react";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-const initialState = { users: [], loading: false, error: null };
+// create Async thunk
 
-// create action
-export const createUser = createAsyncThunk(
+export const userDetal = createAsyncThunk(
   "createUser",
-  async (data, { rejectWithValue }) => {
-    try {
-      const response = await axios.post(
-        "https://68adc16da0b85b2f2cf4896e.mockapi.io/crud"
-      );
-      return response.data;
-    } catch (error) {
-      return rejectWithValue(error.response.data);
-    }
+  async (data, { rejectwithValue }) => {
+    const response = await fetch(
+      "https://68adc16da0b85b2f2cf4896e.mockapi.io/crud",{
+        method:"POST",
+        headers:{
+            "content-Type:application/json"
+        },
+        body: JSON.stringify(data)
+
+      }
+    );
+    const data = await response.json();
   }
 );
 
-const userDetails = createSlice({
-  name: "userDetail",
-  initialState,
-  reducers: {},
-  extraReducers: {
-    [createUser.pending]: (state) => {
-      state.loading = true;
-    },
-    [createUser.fulfilled]: (state, action) => {
-      state.loading = false;
-      state.users.push(action.payload);
-    },
-    [createUser.rejected]: (state, action) => {
-      state.loading = false;
-      state.error = action.payload;
-    },
+export const userDetail = createSlice({
+  name: "users",
+  initialState: {
+    users: [],
+    loading: false,
+    error: null,
+  },
+  extraReducers: (builder) => {
+    builder.addCase();
   },
 });
-
-export const {} = userDetails.reducer;
-export default userDetails.reducer;
